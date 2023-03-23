@@ -12,10 +12,11 @@ const int MAX_CIRCLES_SETS = 2;
 const float LOCATION_RANGE = 1000.0f; 
 const float VELOCITY_RANGE = 5.0f;
 const float SIMULATION_TIME = 10.0f;
+const float SPEED = 30.0f;
 
 Timer gTimer;
 
-// TODO have one array 
+
 std::vector<Circle> gStaticCircles(MAX_CIRCLES / MAX_CIRCLES_SETS);
 std::vector<Circle> gDynamicCircles(MAX_CIRCLES / MAX_CIRCLES_SETS);
 
@@ -40,10 +41,10 @@ int main()
     while (bIsRunning)
     {
         gTimer.Tick();
-        
+
         bIsRunning = Simulate();
 
-
+        std::cout << gTimer.GetDeltaTime() << std::endl;
     }
 
     //******** Shutdown ***********
@@ -124,7 +125,7 @@ void Move(Circle* circles, uint32_t numCircles)
     while(circles != circlesEnd)
     {
         // Move the circle
-
+        circles->Location += (SPEED * circles->Velocity) * gTimer.GetDeltaTime();
         ++circles;
     }
     

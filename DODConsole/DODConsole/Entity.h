@@ -1,15 +1,31 @@
 #pragma once
 
-//******************************************************
-//****** Basic Structs for containing floats
-//****** Vectors without the vector code
-//******************************************************
 
 struct Vector2 
 {
 	float X = 0.0f;
 	float Y = 0.0f;
+
+	
+
+	Vector2& operator+=(const Vector2 v)
+	{
+		X += v.X;
+		Y += v.Y;
+		return *this;
+	}
 };
+
+Vector2 operator*(const Vector2 v, const float f)
+{
+	return { v.X * f, v.Y * f };
+}
+
+Vector2 operator*(const float f, const Vector2 v)
+{
+	return { v.x * f, v.y * f };
+}
+
 
 struct Vector3
 {
@@ -18,8 +34,6 @@ struct Vector3
 	float Z = 0.0f;
 };
 
-//******************************************************
-//******************************************************
 
 enum class EObjType
 {
